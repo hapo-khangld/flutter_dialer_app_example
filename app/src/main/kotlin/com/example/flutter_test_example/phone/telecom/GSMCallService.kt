@@ -64,7 +64,7 @@ class GSMCallService : InCallService() {
             }
             if (call.details.state == Call.STATE_RINGING || call.state == Call.STATE_RINGING) {
                 Log.i(GSMCallService::class.java.name,"GSM Screen Locked. Starting notification.")
-                //callNotificationManager.setupNotification()
+                callNotificationManager.setupNotification()
             }
         } else {
             Log.i(GSMCallService::class.java.name, "Incoming call received. State is: ${call.details.state}")
@@ -72,12 +72,12 @@ class GSMCallService : InCallService() {
                 Log.i(GSMCallService::class.java.name,"isRinging set to true.")
                 isRinging = true
             }
-            //callNotificationManager.setupNotification()
+            callNotificationManager.setupNotification()
         }
     }
 
     ///todo: Miss call notification manager
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCallRemoved(call: Call) {
         super.onCallRemoved(call)
         call.unregisterCallback(callListener)

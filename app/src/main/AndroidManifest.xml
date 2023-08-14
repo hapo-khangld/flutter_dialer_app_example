@@ -40,7 +40,7 @@
             android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
-            android:theme="@style/LaunchTheme"
+            android:theme="@style/Theme.Call_App"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
@@ -81,6 +81,7 @@
             android:launchMode="singleTask"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.Call_App"
             tools:targetApi="n" />
 
         <service
@@ -104,8 +105,8 @@
             android:exported="true"
             tools:ignore="ExportedReceiver">
             <intent-filter>
-                <action android:name="com.kapp.call_app.HANGUP_CALL_ACTION" />
-                <action android:name="com.kapp.call_app.ANSWER_CALL_ACTION" />
+                <action android:name="com.example.flutter_test_example.HANGUP_CALL_ACTION" />
+                <action android:name="com.example.flutter_test_example.ANSWER_CALL_ACTION" />
             </intent-filter>
         </receiver>
 

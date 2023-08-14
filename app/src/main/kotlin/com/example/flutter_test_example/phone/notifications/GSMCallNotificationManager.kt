@@ -17,7 +17,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
 import androidx.core.content.ContextCompat
 import com.example.flutter_test_example.R
+import com.example.flutter_test_example.phone.activity.DialerActivity
 import com.example.flutter_test_example.phone.activity.ExternalCallActivity
+import com.example.flutter_test_example.phone.helper.CallContactAvatarHelper
 import com.example.flutter_test_example.phone.helper.getCallContact
 import com.example.flutter_test_example.phone.telecom.CallManager
 
@@ -25,8 +27,8 @@ class GSMCallNotificationManager(private val context: Context) {
 
     companion object {
         const val INTENT_NOTIF_ID = "NOTIFICATION_ID"
-        const val INTENT_HANGUP_CALL_NOTIF_ACTION = "com.kapp.call_app.HANGUP_CALL_ACTION"
-        const val INTENT_ANSWER_CALL_NOTIF_ACTION = "com.kapp.call_app.ANSWER_CALL_ACTION"
+        const val INTENT_HANGUP_CALL_NOTIF_ACTION = "com.example.flutter_test_example.HANGUP_CALL_ACTION"
+        const val INTENT_ANSWER_CALL_NOTIF_ACTION = "com.example.flutter_test_example.ANSWER_CALL_ACTION"
 
         private const val CALL_NOTIF_ID = 1
         private const val MISSED_CALLS_NOTIF_ID = 2
@@ -43,7 +45,7 @@ class GSMCallNotificationManager(private val context: Context) {
     private val ACCEPT_CALL_CODE = 0
     private val DECLINE_CALL_CODE = 1
     private val notificationManager : NotificationManager get() = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    //private val callContactAvatarHelper = CallContactAvatarHelper(context)
+    private val callContactAvatarHelper = CallContactAvatarHelper(context)
     private var currentCall : Call? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -51,7 +53,7 @@ class GSMCallNotificationManager(private val context: Context) {
         Log.i(TAG,"Setup notification called")
         getCallContact(context.applicationContext, CallManager.getPrimaryCall()) { callContact ->
             currentCall = CallManager.getPrimaryCall()
-            //val callContactAvatar = callContactAvatarHelper.getCallContactAvatar(callContact)
+            val callContactAvatar = callContactAvatarHelper.getCallContactAvatar(callContact)
             val callState = CallManager.getState()
             val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
             val isHighPriority = powerManager.isInteractive && callState == Call.STATE_RINGING
@@ -109,9 +111,9 @@ class GSMCallNotificationManager(private val context: Context) {
             notificationLayoutHeadsUp.setTextViewText(R.id.external_incoming_call_info, context.getString(contentTextId))
 
 
-//            if (callContactAvatar != null) {
-//                notificationLayoutHeadsUp.setImageViewBitmap(R.id.external_caller_picture, callContactAvatar)
-//            }
+            if (callContactAvatar != null) {
+                notificationLayoutHeadsUp.setImageViewBitmap(R.id.external_caller_picture, callContactAvatar)
+            }
 
             val builder = NotificationCompat.Builder(context, channelId)
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
@@ -152,11 +154,11 @@ class GSMCallNotificationManager(private val context: Context) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.Q)
     fun displayMissedCallNotification(call: Call){
         Log.i(TAG,"Setup missed call notification")
         getCallContact(context.applicationContext, call) { callContact ->
-            //val callContactAvatar = callContactAvatarHelper.getCallContactAvatar(callContact)
+            val callContactAvatar = callContactAvatarHelper.getCallContactAvatar(callContact)
             val channelId = DEFAULT_NOTIF_CHANNEL_ID
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val name = NOTIF_CHANNEL_DEFAULT
@@ -176,8 +178,8 @@ class GSMCallNotificationManager(private val context: Context) {
             }
             notificationManager.createNotificationChannel(notificationChannel)
 
-//            val openAppIntent = DialerActivity.getStartIntent(context)
-//            val openAppPendingIntent = PendingIntent.getActivity(context, 0, openAppIntent, PendingIntent.FLAG_MUTABLE)
+            val openAppIntent = DialerActivity.getStartIntent(context)
+            val openAppPendingIntent = PendingIntent.getActivity(context, 0, openAppIntent, PendingIntent.FLAG_MUTABLE)
 
             var callerName = callContact.name.ifEmpty { context.getString(R.string.unknown_caller) }
             if (callContact.numberLabel.isNotEmpty()) {
@@ -192,9 +194,9 @@ class GSMCallNotificationManager(private val context: Context) {
             notificationLayoutHeadsUp.setTextViewText(R.id.external_incoming_call_info, context.getString(contentTextId))
 
 
-//            if (callContactAvatar != null) {
-//                notificationLayoutHeadsUp.setImageViewBitmap(R.id.external_caller_picture, callContactAvatar)
-//            }
+            if (callContactAvatar != null) {
+                notificationLayoutHeadsUp.setImageViewBitmap(R.id.external_caller_picture, callContactAvatar)
+            }
 
             val builder = NotificationCompat.Builder(context, channelId)
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
@@ -213,7 +215,7 @@ class GSMCallNotificationManager(private val context: Context) {
                 .setSound(ringtoneUri)
                 .setColor(ContextCompat.getColor(context, R.color.primary_color))
                 .setCustomHeadsUpContentView(notificationLayoutHeadsUp)
-                //.setContentIntent(openAppPendingIntent)
+                .setContentIntent(openAppPendingIntent)
 
             val notification = builder.build()
             notificationManager.notify(MISSED_CALLS_NOTIF_ID, notification)

@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken
 class MyContactsContentPovider {
 
     companion object {
-        private const val AUTHORITY = "com.kapp.call_app.contactsprovider"
+        private const val AUTHORITY = "com.example.flutter_test_example.contactsprovider"
         val CONTACTS_CONTENT_URI = Uri.parse("content://$AUTHORITY/contacts")
 
         const val FAVORITES_ONLY = "favorites_only"
