@@ -1,0 +1,92 @@
+{
+  "project_info": {
+    "project_number": "614215168101",
+    "project_id": "bikkorefx-hapo",
+    "storage_bucket": "bikkorefx-hapo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614215168101:android:aa66d656ef1acb9114d68c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_test_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614215168101-s7mii4e2geuufautefgj0p348atdl7n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw_btIPYCgd5-XSkDe4BV8QkOOttYbps4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614215168101-s7mii4e2geuufautefgj0p348atdl7n0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "614215168101-muudpe639egrh8irp307jbemonbul1d3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.cocoapods.app-review",
+                "app_store_id": "123456789"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614215168101:android:2dd6335ef714b93e14d68c",
+        "android_client_info": {
+          "package_name": "mediabeats.bikkorefx.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614215168101-0d3a3jjksn05qflnc92tl7h8d98r4kp4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mediabeats.bikkorefx.demo",
+            "certificate_hash": "25dba154864ab527042d4671a70f2ad8f9c46285"
+          }
+        },
+        {
+          "client_id": "614215168101-s7mii4e2geuufautefgj0p348atdl7n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw_btIPYCgd5-XSkDe4BV8QkOOttYbps4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614215168101-s7mii4e2geuufautefgj0p348atdl7n0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "614215168101-muudpe639egrh8irp307jbemonbul1d3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.cocoapods.app-review",
+                "app_store_id": "123456789"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
